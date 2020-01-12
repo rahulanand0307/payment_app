@@ -1,0 +1,103 @@
+.filter_div {
+  height: 150px;
+  
+  .search-hero {
+    max-width: 500px;
+  }
+}
+
+.width_control {
+  width: 5px !important;
+}
+
+
+.Table {
+  display: table;
+  width: 100%;
+  border-spacing: 0px 20px;
+}
+.TableRow {
+  display: table-row;
+  background-color: #ffffff;
+  box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+}
+
+.TableCell {
+  display: table-cell;
+  padding: 15px 15px;
+}
+
+.table-header {
+  background-color: #e6e6e6;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.TableBody {
+  display: table-row-group;
+}
+
+
+
+@media all and (max-width: 900px) {
+
+  .Table {
+    border-spacing: unset;
+  }
+
+  .btn_fo {
+    width: 205px;
+    margin: 10px 0px !important;
+  }
+  .heading {
+    text-align: center !important;
+    margin-bottom: 40px;
+  }
+  .table-header {
+    display: none !important;
+  }
+.date_filter {
+  display: flex;
+  flex-direction: column;
+}
+  .TableRow {
+    display: block;
+    margin: 25px;
+  }
+  .filter_div {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 200px;
+  }
+  .edit_button {
+    margin-right: 10px;
+    &::before{
+      content:'' !important;
+      flex-basis: 1% !important;
+      text-align: center !important;
+    }
+    
+  }
+  .delete_tranc {
+    display: none;
+  }
+  .TableCell {
+    flex-basis: 100%;
+    display: flex;
+    padding: 10px 0;
+    &:before {
+      color: #6c7a89;
+      padding-right: 10px;
+      content: attr(data-label);
+      flex-basis: 50%;
+      text-align: right;
+    }
+  }
+}
+
+::ng-deep .ngx-pagination {
+  width:330px !important;
+}
+

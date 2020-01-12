@@ -1,0 +1,111 @@
+<div class="container">
+  <h2 class="text-left mt-3 heading">Payment Page</h2>
+
+  <!-- Filter -->
+
+  <div class="filter_div d-flex justify-content-between align-items-center">
+    <div class="search-hero shadow btn_fo">
+      <input class="form-control" type="text" name="search" id="search" [(ngModel)]="searchText" autocomplete="off"
+        placeholder="Search" />
+    </div>
+
+    <div>
+      <mat-form-field>
+        <mat-label>Filter By Payment Status</mat-label>
+        <mat-select (selectionChange)="dropdown($event.value)">
+          <mat-option *ngFor="let status of payment_status" [value]="status.value">
+            {{ status.viewValue }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="date_filter btn_fo">
+      <mat-form-field>
+        <input matInput [max]="now.value" [matDatepicker]="picker1" placeholder="Start Date" id="start" name="start"
+          [formControl]="date" ngDefaultControl />
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field class="mx-2 btn_fo">
+        <input matInput [max]="now.value" [min]="date.value" id="end" name="end" [matDatepicker]="picker3"
+          placeholder="End Date" [(ngModel)]="end_date_2" ngDefaultControl />
+        <mat-datepicker-toggle matSuffix [for]="picker3" [formControl]="end_date"></mat-datepicker-toggle>
+        <mat-datepicker #picker3></mat-datepicker>
+      </mat-form-field>
+      <button class="btn_fo" mat-stroked-button color="primary" (click)="date_filter(date.value)">
+        Date Filter
+      </button>
+    </div>
+  </div>
+
+  <!-- Table -->
+
+  <div class="d-flex align-items-center justify-content-end date_filter">
+    <div class="btn_fo mx-2">
+      <button class="w-100" mat-stroked-button color="primary" (click)="new()">
+        Add New Transction
+      </button>
+    </div>
+    <div class="btn_fo">
+      <button class="w-100" mat-stroked-button color="warn" (click)="delete()">
+        Delete Transaction(s)
+      </button>
+    </div>
+  </div>
+  <div class="Table" matSort (matSortChange)="sortData($event)">
+    <div class="TableBody">
+      <div class="TableRow table-header">
+        <div class="TableCell" mat-sort-header="paymentId">Payment Id</div>
+        <div class="TableCell" mat-sort-header="orderDate">Order Date</div>
+        <div class="TableCell" mat-sort-header="merchatId">Merchant Id</div>
+        <div class="TableCell" mat-sort-header="customerEmail">
+          Customer Email
+        </div>
+        <div class="TableCell" mat-sort-header="amount">Amount</div>
+        <div class="TableCell" mat-sort-header="paymentStatus">
+          Payment Status
+        </div>
+        <div class="TableCell">Select</div>
+        <div class="TableCell">Edit</div>
+      </div>
+      <div class="TableRow" *ngFor="
+          let payment of payments
+            | paginate: { itemsPerPage: 5, currentPage: p }
+            | filter: searchText
+        ">
+        <div class="TableCell" data-label="Payment Id">
+          {{ payment.paymentId }}
+        </div>
+        <div class="TableCell" data-label="Order Date">
+          {{ payment.orderDate }}
+        </div>
+        <div class="TableCell" data-label="Merchant Id">
+          {{ payment.merchatId }}
+        </div>
+        <div class="TableCell" data-label="Customer Email">
+          {{ payment.customerEmail }}
+        </div>
+        <div class="TableCell" data-label="Amount">{{ payment.amount }}</div>
+        <div class="TableCell" data-label="Payment Status">
+          {{ payment.paymentStatus }}
+        </div>
+        <div class="TableCell">
+          <mat-checkbox (change)="checkboxfn($event, payment)" value="{{ payment.paymentId }}" color="white">
+          </mat-checkbox>
+        </div>
+        <div class="TableCell edit_button">
+          <button mat-stroked-button color="primary" class="w-100 py-1 rounded-0 font-weight-light mt-2"
+            (click)="edit(payment)">
+            Edit
+          </button>
+        </div>
+      </div>
+    </div>
+    <pagination-controls class="w-100" (pageChange)="p = $event" (pageBoundsCorrection)="pageChanged($event)"
+      autoHide="true" responsive="true" (pageChange)="onPageChange(p)" previousLabel="Previous" nextLabel="Next"
+      screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page">
+    </pagination-controls>
+  </div>
+</div>

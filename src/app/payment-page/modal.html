@@ -1,0 +1,76 @@
+<div class="px-1 pt-4 pb-3">
+<h5 class="text-center">Edit Transaction Details</h5>
+  <form class="example-form">
+                                          <!-- Email  -->
+    <div>
+      <mat-form-field class="example-full-width w-100">
+        <input matInput placeholder="Email" id="email" name="email" [formControl]="emailFormControl" [(ngModel)]="userEmailID">
+        <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+          Customer Email
+        </mat-error>
+        <mat-error *ngIf="emailFormControl.hasError('required')">
+          Email is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+                                          <!-- Payment Id  -->
+    <div *ngIf="this.type == 'update'">
+      <mat-form-field class="example-full-width w-100">
+        <input matInput [(ngModel)]="paymentId" id="pid" name="pid" placeholder="Payment Id" value={{paymentId}} readonly >
+      </mat-form-field>
+    </div>
+    <div *ngIf="this.type != 'update'">
+      <mat-form-field class="example-full-width w-100">
+        <input matInput [(ngModel)]="paymentId" id="pid" name="pid" placeholder="Payment Id" value={{paymentId}}>
+      </mat-form-field>
+    </div>
+
+
+                                          <!-- Merchant Id  -->
+    <div *ngIf="this.type == 'update'">
+      <mat-form-field class="example-full-width w-100">
+        <input matInput [(ngModel)]="merchantid" id="mid" name="mid"  placeholder="Merchant Id" [value]="merchantid" readonly>
+      </mat-form-field>
+    </div>
+
+    <div *ngIf="this.type != 'update'">
+      <mat-form-field class="example-full-width w-100">
+        <input matInput [(ngModel)]="merchantid" id="mid" name="mid"  placeholder="Merchant Id" [value]="merchantid">
+      </mat-form-field>
+    </div>
+
+
+                                           <!-- Amount  -->
+    <div>
+      <mat-form-field class="example-full-width w-100">
+        <input matInput [(ngModel)]="amount" id="amt" name="amt" placeholder="Amount" [value]="amount">
+      </mat-form-field>
+    </div>
+
+                                          <!-- Payment Status  -->
+
+    <div>
+      <mat-form-field class="w-100">
+        <mat-label>Change Payment Status</mat-label>
+        <mat-select (selectionChange)="dropdown_modal($event.value)">
+          <mat-option *ngFor="let status of payment_status" [value]="status.value">
+            {{status.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+  </form>
+
+                                          <!-- Action  -->
+<div class="d-flex justify-content-end align-items-center">
+  <div class="mt-4 mr-4">
+    <button mat-stroked-button color="warn" (click)=close()>Cancel</button>
+  </div>
+  <div class="mt-4">
+    <button mat-stroked-button color="primary" (click)=done()>Done</button>
+  </div>
+</div>
+  
+</div>

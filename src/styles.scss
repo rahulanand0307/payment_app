@@ -1,0 +1,80 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$payment-primary: mat-palette($mat-indigo);
+$payment-accent: mat-palette($mat-pink, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$payment-warn: mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$payment-theme: mat-light-theme($payment-primary, $payment-accent, $payment-warn);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($payment-theme);
+
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+::ng-deep .mat-checkbox-label{
+    margin-left:15px;
+  }
+  
+  ::ng-deep .mat-checkbox-layout .mat-checkbox-label {
+    margin-left: 2px !important;
+  }
+  
+  ::ng-deep .mat-checkbox-layout .mat-checkbox-label {
+    font-size: 15px;
+  }
+  
+  .mat-checkbox-layout .mat-checkbox-label {
+    font-size: 14px;
+    color: grey;
+    font-weight: 300;
+    margin-left: 24px;
+  }
+  .mat-checkbox-frame {
+    border: 1px solid grey ;
+  }
+  
+  .mat-checkbox-checkmark-path { 
+      stroke: grey  ;
+  }
+  .mat-checkbox-frame {
+    border-width: 1px !important;
+  }
+  .mat-checkbox-layout .mat-checkbox-label {
+    margin-left: 10px;
+    }
+    .mat-checkbox-inner-container{
+      height: 14px;
+      width: 14px;
+    }
+    .mat-checkbox-layout{
+      margin-bottom: 0px;
+    }
+
+    .mat-checkbox-frame {
+        border: 1px solid grey !important;
+      }
+      
+      .mat-checkbox-checkmark-path { 
+        stroke:grey  !important;
+      }
